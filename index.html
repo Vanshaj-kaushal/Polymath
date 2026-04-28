@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>90-Day Polymath Roadmap</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <div class="header">
+      <div class="header-eyebrow">90-Day Polymath Roadmap</div>
+      <h1>The Renaissance Mind</h1>
+      <p>Five disciplines. Daily practice. One extraordinary year begins here.</p>
+    </div>
+
+    <div class="quote-bar" onclick="cycleQuote()">
+      <div class="quote-icon">"</div>
+      <div>
+        <div class="quote-text" id="quote-text">Learning never exhausts the mind.</div>
+        <div class="quote-attr" id="quote-attr">— Leonardo da Vinci</div>
+      </div>
+    </div>
+
+    <div class="nav-tabs">
+      <button class="nav-tab active" onclick="switchTab('overview')">Overview</button>
+      <button class="nav-tab" onclick="switchTab('schedule')">Daily Schedule</button>
+      <button class="nav-tab" onclick="switchTab('disciplines')">Resources</button>
+      <button class="nav-tab" onclick="switchTab('projects')">Weekly Projects</button>
+      <button class="nav-tab" onclick="switchTab('progress')">Progress</button>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="panel-overview" class="panel active">
+      <div class="phases-grid">
+        <div class="phase-card">
+          <div class="phase-number">Phase 1</div>
+          <div class="phase-title">Foundation</div>
+          <div class="phase-days">Days 1–30</div>
+          <div class="phase-desc">Build vocabulary in each discipline. Survey the landscape. Identify what excites you most. No deep dives yet — breadth before depth.</div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-number">Phase 2</div>
+          <div class="phase-title">Connection</div>
+          <div class="phase-days">Days 31–60</div>
+          <div class="phase-desc">Start noticing patterns across disciplines. A principle in physics mirrors one in music theory. Historical events echo in today's headlines. Begin weekly projects.</div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-number">Phase 3</div>
+          <div class="phase-title">Synthesis</div>
+          <div class="phase-days">Days 61–90</div>
+          <div class="phase-desc">Produce original work that stacks skills. Create projects that only you — with your unique combination of disciplines — could make.</div>
+        </div>
+      </div>
+
+      <div style="border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 10px; background: var(--parchment);">
+        <div style="font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 12px;">The five disciplines</div>
+        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; text-align: center;">
+          <div style="padding: 10px 4px; border-radius: 8px; background: rgba(58,123,213,0.1); color: #3A7BD5; font-size: 11.5px; font-weight: 500;">Science</div>
+          <div style="padding: 10px 4px; border-radius: 8px; background: rgba(194,65,106,0.1); color: #C2416A; font-size: 11.5px; font-weight: 500;">Arts</div>
+          <div style="padding: 10px 4px; border-radius: 8px; background: rgba(139,94,60,0.1); color: #8B5E3C; font-size: 11.5px; font-weight: 500;">History</div>
+          <div style="padding: 10px 4px; border-radius: 8px; background: rgba(46,139,87,0.1); color: #2E8B57; font-size: 11.5px; font-weight: 500;">Math & Logic</div>
+          <div style="padding: 10px 4px; border-radius: 8px; background: rgba(123,63,160,0.1); color: #7B3FA0; font-size: 11.5px; font-weight: 500;">Physical</div>
+        </div>
+      </div>
+
+      <div style="border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; background: var(--parchment);">
+        <div style="font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 10px;">Daily time commitment</div>
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <div style="text-align: center;">
+            <div style="font-family: 'Playfair Display', serif; font-size: 28px; color: var(--gold); font-weight: 600;">2.5</div>
+            <div style="font-size: 11px; color: var(--muted);">hrs/day</div>
+          </div>
+          <div style="flex: 1; min-width: 200px;">
+            <div style="font-size: 12.5px; color: var(--muted); line-height: 1.6;">Morning study (1 hr) · Midday practice (45 min) · Evening reflection (45 min). Weekends include one synthesis project (2–3 hrs).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCHEDULE -->
+    <div id="panel-schedule" class="panel">
+      <div class="schedule-header">
+        <div class="schedule-label">Weekday template · adjustable to your lifestyle</div>
+        <div class="total-time">2.5 hrs/day</div>
+      </div>
+
+      <div id="schedule-list"></div>
+    </div>
+
+    <!-- DISCIPLINES / RESOURCES -->
+    <div id="panel-disciplines" class="panel">
+      <div class="disc-grid" id="disc-pills"></div>
+      <div id="disc-content"></div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div id="panel-projects" class="panel">
+      <div class="week-select" id="week-select"></div>
+      <div id="project-cards"></div>
+    </div>
+
+    <!-- PROGRESS -->
+    <div id="panel-progress" class="panel">
+      <div class="smart-grid" id="smart-grid"></div>
+      <div class="progress-section" id="progress-bars"></div>
+      <div style="font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 10px;">90-day milestones</div>
+      <div class="milestone-list" id="milestone-list"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
