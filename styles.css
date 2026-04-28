@@ -174,6 +174,27 @@ body { font-family: 'DM Sans', sans-serif; background: transparent; color: var(-
   line-height: 1.5;
 }
 
+/* DISCIPLINES GRID */
+.disciplines-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  text-align: center;
+}
+
+.discipline-item {
+  padding: 10px 4px;
+  border-radius: 8px;
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+.discipline-item:nth-child(1) { background: rgba(58,123,213,0.1); color: #3A7BD5; }
+.discipline-item:nth-child(2) { background: rgba(194,65,106,0.1); color: #C2416A; }
+.discipline-item:nth-child(3) { background: rgba(139,94,60,0.1); color: #8B5E3C; }
+.discipline-item:nth-child(4) { background: rgba(46,139,87,0.1); color: #2E8B57; }
+.discipline-item:nth-child(5) { background: rgba(123,63,160,0.1); color: #7B3FA0; }
+
 /* DAILY SCHEDULE */
 .schedule-header {
   display: flex;
@@ -358,6 +379,11 @@ body { font-family: 'DM Sans', sans-serif; background: transparent; color: var(-
   padding: 1.1rem 1.25rem;
   margin-bottom: 10px;
   background: var(--parchment);
+  display: none;
+}
+
+.project-card.active {
+  display: block;
 }
 
 .project-card-top {
@@ -533,4 +559,219 @@ body { font-family: 'DM Sans', sans-serif; background: transparent; color: var(-
   font-size: 10.5px;
   color: var(--muted);
   flex-shrink: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  #app {
+    padding: 0.25rem 1rem 1rem;
+    margin: 0;
+  }
+
+  .header {
+    padding: 1rem 0.5rem 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .header h1 {
+    font-size: 22px;
+  }
+
+  .quote-bar {
+    padding: 0.75rem 1rem;
+    margin: 0 0 1rem;
+  }
+
+  .nav-tabs {
+    gap: 2px;
+    margin-bottom: 1rem;
+  }
+
+  .nav-tab {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .phases-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .phase-card {
+    padding: 0.75rem;
+  }
+
+  .phase-title {
+    font-size: 14px;
+  }
+
+  .phase-desc {
+    font-size: 11px;
+  }
+
+  .time-block {
+    gap: 8px;
+    padding: 0.5rem 0;
+  }
+
+  .time-col {
+    width: 45px;
+    font-size: 10px;
+  }
+
+  .block-title {
+    font-size: 12px;
+  }
+
+  .block-detail {
+    font-size: 10.5px;
+  }
+
+  .block-duration {
+    font-size: 10px;
+  }
+
+  .disc-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .disc-pill {
+    padding: 6px 8px;
+    font-size: 10.5px;
+  }
+
+  .disc-section-header {
+    padding: 0.5rem 0.75rem;
+    font-size: 11px;
+  }
+
+  .resource-list {
+    padding: 0.25rem 0.75rem 0.5rem;
+  }
+
+  .resource-item {
+    gap: 8px;
+    padding: 6px 0;
+  }
+
+  .resource-type {
+    font-size: 9px;
+    padding: 1px 5px;
+  }
+
+  .resource-name {
+    font-size: 12px;
+  }
+
+  .resource-sub {
+    font-size: 10px;
+  }
+
+  .week-select {
+    gap: 4px;
+    margin-bottom: 0.75rem;
+  }
+
+  .week-btn {
+    padding: 4px 8px;
+    font-size: 10.5px;
+  }
+
+  .project-card {
+    padding: 0.8rem 1rem;
+  }
+
+  .project-title {
+    font-size: 14px;
+  }
+
+  .project-desc {
+    font-size: 11.5px;
+  }
+
+  .skill-tag {
+    font-size: 9.5px;
+    padding: 1px 6px;
+  }
+
+  .smart-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .smart-card {
+    padding: 0.6rem 0.75rem;
+  }
+
+  .smart-letter {
+    font-size: 20px;
+  }
+
+  .smart-template {
+    font-size: 11px;
+  }
+
+  .progress-label-row {
+    margin-bottom: 4px;
+  }
+
+  .progress-disc-name {
+    font-size: 12px;
+  }
+
+  .progress-pct {
+    font-size: 11px;
+  }
+
+  .milestone-item {
+    padding: 6px 0;
+    gap: 8px;
+  }
+
+  .milestone-check {
+    width: 16px;
+    height: 16px;
+  }
+
+  .milestone-check.done::after {
+    width: 4px;
+    height: 4px;
+  }
+
+  .milestone-text {
+    font-size: 11.5px;
+  }
+
+  .milestone-day {
+    font-size: 9.5px;
+  }
+
+  .week-select {
+    display: block;
+  }
+
+  .week-btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 4px;
+    text-align: left;
+    padding: 8px 12px;
+  }
+
+  .project-card {
+    margin-top: 8px;
+  }
+
+  .disciplines-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .discipline-item {
+    flex: 1 1 45%;
+    min-width: 100px;
+  }
 }

@@ -200,14 +200,14 @@ function renderProjects() {
   const select = document.getElementById('week-select');
   const weeks = [1,2,3,4,5,6,7,8,9];
   select.innerHTML = weeks.map(w => `
-    <button class="week-btn ${w === activeWeek ? 'active' : ''}" onclick="setWeek(${w})">Week ${w}</button>
+    <button class="week-btn ${w === activeWeek ? 'active' : ''}" onclick="setWeek(${w}, this)">Week ${w}</button>
   `).join('');
 
-  const p = projects.find(x => x.week === activeWeek);
-  const diffColors = { Beginner: '#2E8B57', Intermediate: '#C9A84C', Advanced: '#C2416A' };
-  const dc = diffColors[p.diff] || '#888';
-  document.getElementById('project-cards').innerHTML = `
-    <div class="project-card">
+  const cards = document.getElementById('project-cards');
+  cards.innerHTML = projects.map(p => {
+    const diffColors = { Beginner: '#2E8B57', Intermediate: '#C9A84C', Advanced: '#C2416A' };
+    const dc = diffColors[p.diff] || '#888';
+    return `<div class="project-card ${p.week === activeWeek ? 'active' : ''}" id="project-week-${p.week}">
       <div class="project-card-top">
         <div class="project-title">${p.title}</div>
         <div class="project-diff" style="background:${dc}18;color:${dc};">${p.diff}</div>
@@ -217,11 +217,15 @@ function renderProjects() {
         ${p.skills.map(s => `<div class="skill-tag">${s}</div>`).join('')}
       </div>
     </div>`;
+  }).join('');
 }
 
-function setWeek(w) {
+function setWeek(w, btn) {
   activeWeek = w;
-  renderProjects();
+  document.querySelectorAll('.project-card').forEach(card => card.classList.remove('active'));
+  document.getElementById(`project-week-${w}`).classList.add('active');
+  document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
 }
 
 function renderProgress() {
