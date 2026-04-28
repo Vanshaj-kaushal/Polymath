@@ -169,7 +169,7 @@ function renderDisciplines() {
   pills.innerHTML = disciplines.map(d => `
     <div class="disc-pill ${d.id === activeDiscipline ? 'active' : ''}"
       style="background:${d.color}22;color:${d.color};"
-      onclick="setDiscipline('${d.id}')">${d.name}</div>
+      data-id="${d.id}">${d.name}</div>
   `).join('');
 
   const d = disciplines.find(x => x.id === activeDiscipline);
@@ -183,12 +183,27 @@ function renderDisciplines() {
           <div class="resource-item">
             <span class="resource-type" style="background:${(typeColors[r.type]||'#888')}18;color:${typeColors[r.type]||'#888'};">${r.type}</span>
             <div>
-              <div class="resource-name" onclick="openLink('${r.url}')">${r.name}</div>
+              <div class="resource-name" data-url="${r.url}">${r.name}</div>
               <div class="resource-sub">${r.sub}</div>
             </div>
           </div>`).join('')}
       </div>
     </div>`;
+
+  // Add event listeners
+  document.querySelectorAll('.disc-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      const id = pill.getAttribute('data-id');
+      setDiscipline(id);
+    });
+  });
+
+  document.querySelectorAll('.resource-name').forEach(name => {
+    name.addEventListener('click', () => {
+      const url = name.getAttribute('data-url');
+      window.open(url, '_blank');
+    });
+  });
 }
 
 function setDiscipline(id) {
@@ -200,7 +215,7 @@ function renderProjects() {
   const select = document.getElementById('week-select');
   const weeks = [1,2,3,4,5,6,7,8,9];
   select.innerHTML = weeks.map(w => `
-    <button class="week-btn ${w === activeWeek ? 'active' : ''}" onclick="setWeek(${w}, this)">Week ${w}</button>
+    <button class="week-btn ${w === activeWeek ? 'active' : ''}" data-week="${w}">Week ${w}</button>
   `).join('');
 
   const cards = document.getElementById('project-cards');
@@ -218,6 +233,14 @@ function renderProjects() {
       </div>
     </div>`;
   }).join('');
+
+  // Add event listeners
+  document.querySelectorAll('.week-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const w = parseInt(btn.getAttribute('data-week'));
+      setWeek(w, btn);
+    });
+  });
 }
 
 function setWeek(w, btn) {
@@ -252,12 +275,20 @@ function renderProgress() {
 
   const ml = document.getElementById('milestone-list');
   ml.innerHTML = milestones.map((m, i) => `
-    <div class="milestone-item ${milestoneState[i] ? 'done' : ''}" onclick="toggleMilestone(${i})">
+    <div class="milestone-item ${milestoneState[i] ? 'done' : ''}" data-index="${i}">
       <div class="milestone-check ${milestoneState[i] ? 'done' : ''}"></div>
       <div class="milestone-text">${m.text}</div>
       <div class="milestone-day">${m.day}</div>
     </div>
   `).join('');
+
+  // Add event listeners
+  document.querySelectorAll('.milestone-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const i = parseInt(item.getAttribute('data-index'));
+      toggleMilestone(i);
+    });
+  });
 }
 
 function toggleMilestone(i) {
@@ -269,7 +300,21 @@ function openLink(url) {
   window.open(url, '_blank');
 }
 
-renderSchedule();
-renderDisciplines();
-renderProjects();
-renderProgress();
+document.addEventListener('DOMContentLoaded', () => {
+  // Quote bar
+  document.querySelector('.quote-bar').addEventListener('click', cycleQuote);
+
+  // Nav tabs
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const tabName = tab.getAttribute('data-tab');
+      switchTab(tabName);
+    });
+  });
+
+  // Initial renders
+  renderSchedule();
+  renderDisciplines();
+  renderProjects();
+  renderProgress();
+});
